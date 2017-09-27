@@ -3,7 +3,7 @@
  * @author leecade<leecade@163.com>
  */
 import React from 'react'
-improt PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import ReactNative, {
   StyleSheet,
