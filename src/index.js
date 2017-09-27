@@ -2,7 +2,7 @@
  * react-native-swiper
  * @author leecade<leecade@163.com>
  */
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
 import ReactNative, {
@@ -101,7 +101,7 @@ let styles = StyleSheet.create({
 
 // missing `module.exports = exports['default'];` with babel6
 // export default React.createClass({
-module.exports = React.createClass({
+class Slider extends Component {
 
   /**
    * Props Validation
@@ -126,10 +126,10 @@ module.exports = React.createClass({
     autoplayDirection                : PropTypes.bool,
     index                            : PropTypes.number,
     renderPagination                 : PropTypes.func,
-    onScroll                         : PropTypes.func,
-  },
+    onScroll                         : PropTypes.func
+  };
 
-  mixins: [TimerMixin],
+  mixins: [TimerMixin];
 
   /**
    * Default props
@@ -154,7 +154,7 @@ module.exports = React.createClass({
       autoplayDirection                : true,
       index                            : 0,
     }
-  },
+  }
 
   /**
    * Init states
@@ -162,25 +162,25 @@ module.exports = React.createClass({
    */
   getInitialState() {
     return this.initState(this.props)
-  },
+  }
 
   /**
    * autoplay timer
    * @type {null}
    */
-  autoplayTimer: null,
+  autoplayTimer: null;
 
   componentWillMount() {
     this.props = this.injectState(this.props)
-  },
+  }
 
   componentWillReceiveProps(props) {
     this.setState(this.initState(props))
-  },
+  }
 
   componentDidMount() {
     this.autoplay()
-  },
+  }
 
   initState(props) {
     let initState = {
@@ -207,7 +207,7 @@ module.exports = React.createClass({
         : initState.width * setup
     }
     return initState
-  },
+  }
 
   /**
    * Automatic rolling
@@ -228,7 +228,7 @@ module.exports = React.createClass({
       })
       this.scrollTo(this.props.autoplayDirection ? 1 : -1)
     }, this.props.autoplayTimeout * 1000)
-  },
+  }
 
   /**
    * Scroll begin handle
@@ -243,7 +243,7 @@ module.exports = React.createClass({
     this.setTimeout(() => {
       this.props.onScrollBeginDrag && this.props.onScrollBeginDrag(e, this.state, this)
     })
-  },
+  }
 
   /**
    * Scroll end handle
@@ -274,17 +274,17 @@ module.exports = React.createClass({
       // if `onMomentumScrollEnd` registered will be called here
       this.props.onMomentumScrollEnd && this.props.onMomentumScrollEnd(e, this.state, this)
     })
-  },
+  }
 
   onScroll(e) {
     this.props.onScroll({ x: e.nativeEvent.contentOffset.x });
-  },
+  }
 
   onAndroidScroll(e) {
     const event = e.nativeEvent;
     const x = event.position * this.state.width + event.offset * this.state.width;
     this.props.onScroll({ x });
-  },
+  }
 
 
   /**
@@ -321,7 +321,7 @@ module.exports = React.createClass({
       index: index,
       offset: offset,
     })
-  },
+  }
 
   /**
    * Scroll by index
@@ -362,7 +362,7 @@ module.exports = React.createClass({
       }, 50);
     }
 
-  },
+  }
 
   /**
    * Render pagination
@@ -408,7 +408,7 @@ module.exports = React.createClass({
         {dots}
       </View>
     )
-  },
+  }
 
   renderTitle() {
     let child = this.props.children[this.state.index]
@@ -420,7 +420,7 @@ module.exports = React.createClass({
         </View>
       )
       : null
-  },
+  }
 
   renderNextButton() {
     let button;
@@ -436,7 +436,7 @@ module.exports = React.createClass({
         </View>
       </TouchableOpacity>
     )
-  },
+  }
 
   renderPrevButton() {
     let button = null
@@ -452,7 +452,7 @@ module.exports = React.createClass({
         </View>
       </TouchableOpacity>
     )
-  },
+  }
 
   renderButtons() {
     return (
@@ -461,7 +461,8 @@ module.exports = React.createClass({
         {this.renderNextButton()}
       </View>
     )
-  },
+  }
+
   renderScrollView(pages) {
      if (Platform.OS === 'ios')
          return (
@@ -488,7 +489,7 @@ module.exports = React.createClass({
             {pages}
          </ViewPagerAndroid>
       );
-  },
+  }
   /**
    * Inject state to ScrollResponder
    * @param  {object} props origin props
@@ -517,7 +518,7 @@ module.exports = React.createClass({
     }
 
     return props
-  },
+  }
 
   /**
    * Default render
@@ -566,4 +567,6 @@ module.exports = React.createClass({
       </View>
     )
   }
-})
+}
+
+module.exports = Slider;
