@@ -458,9 +458,9 @@ class Slider extends Component {
              {...this.props}
                        contentContainerStyle={[styles.wrapper, this.props.style]}
                        contentOffset={this.state.offset}
-                       onScrollBeginDrag={this.onScrollBegin}
-                       onMomentumScrollEnd={this.onScrollEnd}
-                       onScroll={this.onScroll}
+                       onScrollBeginDrag={(e) => this.onScrollBegin(e)}
+                       onMomentumScrollEnd={(e) => this.onScrollEnd(e)}
+                       onScroll={(e) => this.onScroll(e)}
                        scrollEventThrottle={16}
                        >
              {pages}
@@ -470,9 +470,9 @@ class Slider extends Component {
          <ViewPagerAndroid ref="scrollView"
           {...this.props}
             initialPage={this.state.index}
-            onPageSelected={this.onScrollEnd}
+            onPageSelected={(e) => this.onScrollEnd(e)}
             style={{flex: 1}}
-            onPageScroll={this.onAndroidScroll}
+            onPageScroll={(e) => this.onAndroidScroll(e)}
           >
             {pages}
          </ViewPagerAndroid>
