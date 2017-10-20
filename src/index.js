@@ -131,13 +131,9 @@ class Slider extends Component {
 
   mixins: [TimerMixin];
 
-  /**
-   * Default props
-   * @return {object} props
-   * @see http://facebook.github.io/react-native/docs/scrollview.html
-   */
-  getDefaultProps() {
-    return {
+  constructor(props) {
+    super();
+    this.state = {
       horizontal                       : true,
       pagingEnabled                    : true,
       showsHorizontalScrollIndicator   : false,
@@ -154,14 +150,6 @@ class Slider extends Component {
       autoplayDirection                : true,
       index                            : 0,
     }
-  }
-
-  /**
-   * Init states
-   * @return {object} states
-   */
-  getInitialState() {
-    return this.initState(this.props)
   }
 
   /**
